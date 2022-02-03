@@ -9,7 +9,7 @@ import java.util.*;
  * @author hal
  * @version 2022
  */
-public class Employee {
+public class Employee implements OrganizationElement {
   private final String firstname;
   private final String lastname;
   private final LocalDate birthDate;
