@@ -85,4 +85,25 @@ class TeamTest {
     }
     assertEquals(expectedEmployees, visitedEmployees);
   }
+
+  @Test
+  public void unAutreGroupeImbriquePeutEtreParcourus() {
+    final List<OrganizationElement> expectedEmployees = List.of(frodon, gandalf, frodon, gandalf, frodon, gandalf, gandalf, frodon, gandalf, frodon);
+    List<OrganizationElement> visitedEmployees = new ArrayList<>();
+    Team team1 = new Team();
+    team1.add(frodon);
+    Team team2 = new Team();
+    team2.add(gandalf);
+    Team team3 = new Team();
+    team3.add(frodon); team3.add(gandalf);
+    team2.add(team3);
+    team2.add(frodon);
+    team1.add(team2);
+    team1.add(gandalf);
+    team1.add(team2);
+    for (OrganizationElement element : team1) {
+      visitedEmployees.add(element);
+    }
+    assertEquals(expectedEmployees, visitedEmployees);
+  }
 }
