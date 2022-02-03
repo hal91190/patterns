@@ -1,8 +1,7 @@
 package fr.uvsq.hal.pglp.patterns;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * La classe <code>Employee</code> représente un personnel d'une organisation.
@@ -15,12 +14,14 @@ public class Employee {
   private final String lastname;
   private final LocalDate birthDate;
   private List<String> functions;
+  private Map<PhoneNumberType, PhoneNumber> phoneNumbers;
 
   private Employee(Builder builder) {
     firstname = builder.firstname;
     lastname = builder.lastname;
     birthDate = builder.birthDate;
     functions = builder.functions;
+    phoneNumbers = builder.phoneNumbers;
   }
 
   public String getFirstname() {
@@ -39,6 +40,11 @@ public class Employee {
     return functions.contains(function);
   }
 
+  public Optional<PhoneNumber> getPhoneNumber(PhoneNumberType phoneNumberType) {
+    PhoneNumber phoneNumber = phoneNumbers.get(phoneNumberType);
+    return Optional.ofNullable(phoneNumber);
+  }
+
   /**
    * Permet l'initialisation d'un personnel selon le pattern Builder.
    */
@@ -50,6 +56,7 @@ public class Employee {
 
     // Attributs optionnels
     private List<String> functions;
+    private Map<PhoneNumberType, PhoneNumber> phoneNumbers;
 
     /**
      * Fournit les attributs obligatoires pour un personnel.
@@ -63,6 +70,7 @@ public class Employee {
       this.lastname = lastname;
       this.birthDate = birthDate;
       functions = new ArrayList<>();
+      phoneNumbers = new HashMap<>();
     }
 
     public Employee build() {
@@ -71,6 +79,11 @@ public class Employee {
 
     public Builder function(String function) {
       functions.add(function);
+      return this;
+    }
+
+    public Builder phoneNumber(String phoneNumber, PhoneNumberType phoneNumberType) {
+      phoneNumbers.put(phoneNumberType, new PhoneNumber(phoneNumber, phoneNumberType));
       return this;
     }
   }
