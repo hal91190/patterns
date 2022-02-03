@@ -1,6 +1,8 @@
 package fr.uvsq.hal.pglp.patterns;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * La classe <code>Employee</code> représente un personnel d'une organisation.
@@ -12,24 +14,13 @@ public class Employee {
   private final String firstname;
   private final String lastname;
   private final LocalDate birthDate;
-
-  /**
-   * Initialise un personnel.
-   *
-   * @param firstname prénom
-   * @param lastname nom
-   * @param birthDate date de naissance
-   */
-  public Employee(final String firstname, final String lastname, final LocalDate birthDate) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.birthDate = birthDate;
-  }
+  private List<String> functions;
 
   private Employee(Builder builder) {
     firstname = builder.firstname;
     lastname = builder.lastname;
     birthDate = builder.birthDate;
+    functions = builder.functions;
   }
 
   public String getFirstname() {
@@ -44,13 +35,21 @@ public class Employee {
     return birthDate;
   }
 
+  public boolean hasFunction(String function) {
+    return functions.contains(function);
+  }
+
   /**
    * Permet l'initialisation d'un personnel selon le pattern Builder.
    */
   public static class Builder {
+    // Attributs obligatoires
     private final String firstname;
     private final String lastname;
     private final LocalDate birthDate;
+
+    // Attributs optionnels
+    private List<String> functions;
 
     /**
      * Fournit les attributs obligatoires pour un personnel.
@@ -63,10 +62,16 @@ public class Employee {
       this.firstname = firstname;
       this.lastname = lastname;
       this.birthDate = birthDate;
+      functions = new ArrayList<>();
     }
 
     public Employee build() {
       return new Employee(this);
+    }
+
+    public Builder function(String function) {
+      functions.add(function);
+      return this;
     }
   }
 }
