@@ -87,20 +87,37 @@
             </dependency>
           </dependencies>
         </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.5.3.0</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.2</version>
         <configuration>
           <encoding>UTF-8</encoding>
           <linkXRef>false</linkXRef>
         </configuration>
         <executions>
           <execution>
-            <id>validate</id>
+            <id>validate-with-checkstyle</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>validate-with-spotbugs</id>
             <phase>validate</phase>
             <goals>
               <goal>check</goal>
