@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,5 +59,30 @@ class TeamTest {
     team2.add(gandalf);
     team2.add(team1);
     assertFalse(team1.contains(team1));
+  }
+
+  @Test
+  public void unGroupePeutEtreParcourus() {
+    final List<OrganizationElement> expectedEmployees = List.of(frodon, gandalf);
+    List<OrganizationElement> visitedEmployees = new ArrayList<>();
+    for (OrganizationElement element : communaute) {
+      visitedEmployees.add(element);
+    }
+    assertEquals(expectedEmployees, visitedEmployees);
+  }
+
+  @Test
+  public void unGroupeImbriquePeutEtreParcourus() {
+    final List<OrganizationElement> expectedEmployees = List.of(frodon, gandalf);
+    List<OrganizationElement> visitedEmployees = new ArrayList<>();
+    Team team1 = new Team();
+    team1.add(frodon);
+    Team team2 = new Team();
+    team2.add(gandalf);
+    team1.add(team2);
+    for (OrganizationElement element : team1) {
+      visitedEmployees.add(element);
+    }
+    assertEquals(expectedEmployees, visitedEmployees);
   }
 }

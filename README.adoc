@@ -15,6 +15,6 @@ Vous utiliserez un Singleton pour représenter le programme principal.
 Le nom, le prénom et les fonctions seront implémentés par des chaînes de caractères, la date de naissance par `java.time.localDate` et les numéros de téléphone par une collection d’un type que vous définirez.
 L’initialisation d’un personnel respectera le pattern _Builder_.
 . Définissez la notion de groupe de personnels en vous appuyant sur le pattern _Composite_.
-. Implémentez une stratégie de parcours de la structure.
+. Implémentez une stratégie de parcours des personnels d'une structure.
 Cette dernière se basera sur le pattern _Iterator_.
 Plus précisément, vous vous appuierez sur les interfaces `java.util.iterator` et `java.lang.iterable`.
