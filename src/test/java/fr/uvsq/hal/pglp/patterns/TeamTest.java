@@ -42,6 +42,7 @@ class TeamTest {
     team1.add(frodon);
     Team team2 = new Team();
     team2.add(gandalf);
+    team1.add(team2);
     assertTrue(team1.contains(gandalf));
   }
 
@@ -58,6 +59,7 @@ class TeamTest {
     Team team2 = new Team();
     team2.add(gandalf);
     team2.add(team1);
+    team1.add(team2);
     assertFalse(team1.contains(team1));
   }
 
